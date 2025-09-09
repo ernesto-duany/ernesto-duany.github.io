@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerCode - Learn Together, Code Smarter</title>
+    <meta name="description" content="PeerCode is a collaborative coding platform where students can post questions, get AI hints, and receive peer support to enhance their coding skills.">
+        <logo href="/PeerCode()/peer.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
+        .code-block { background: #1a202c; color: #4b5b6f; }
+        .syntax-highlight { color: #68d391; }
+        .comment { color: #718096; }
+        .string { color: #f6e05e; }
+        .keyword { color: #9f7aea; }
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Modern Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0 2rem;
+      margin-bottom:100px;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-medium);
+      padding: 0 2rem;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      color: var(--primary-dark);
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+      background: rgba(52, 55, 241, 0.1);
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::before {
+      width: 80%;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.3s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .hamburger {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      margin: 5px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    .mobile-menu-toggle.active .hamburger:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .mobile-menu-toggle.active .hamburger:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active .hamburger:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .bg-gray-50{
+        margin-top:70px;
+    }
+    </style>
+</head>
+ <!-- Modern Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">ED</a>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="/index.html" class="nav-link">Old Website</a></li>
+        <li class="nav-item"><a href="/dist/Main website v2.html" class="nav-link">Modern Website</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobile-toggle">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </nav>
+<body class="bg-gray-50">
+    <div id="landingPage" class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <!--Header -->
+        <header class="bg-gray shadow-sm">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-blue-600">PeerCode</h1>
+                <div class="space-x-4">
+                    <button onclick="showDemo()" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        Try Demo
+                    </button>
+                    <button class="border border-blue-600 text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-6 py-20">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold text-gray-900 mb-6">
+                    Learn Together, <span class="text-blue-600">Code Smarter</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Post your coding problems. Get step-by-step AI hints and peer support. 
+                    Join a community where learning never stops.
+                </p>
+                <div class="space-x-4">
+                    <button onclick="showDemo()" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg">
+                        Try Demo
+                    </button>
+                    <button class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors">
+                        Sign Up Free
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Animation -->
+            <div class="bg-gray-900 rounded-xl p-8 max-w-4xl mx-auto shadow-2xl">
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span class="ml-4 text-gray-400 text-sm">main.js</span>
+                </div>
+                <pre class="text-green-400 text-sm"><code>function findTwoSum(nums, target) {
+  // 🤔 How do I solve this efficiently?
+  
+  // 🤖 AI Hint: Think about what you've seen before...
+  // Try using a hash map to store complements!
+  
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    map.set(nums[i], i);
+  }
+  return [];
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="bg-white py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">How PeerCode Works</h2>
+                    <p class="text-xl text-gray-600">Learning made simple with AI guidance and peer support</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Ask Questions</h3>
+                        <p class="text-gray-600">Post your coding problems with syntax-highlighted code blocks. Tag your questions for better discoverability.</p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Get Help</h3>
+                        <p class="text-gray-600">Receive step-by-step AI hints that guide you to the solution, plus detailed answers from experienced peers.</p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Level Up</h3>
+                        <p class="text-gray-600">Practice with coding challenges, earn points by helping others, and track your progress as you grow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-blue-600 py-16">
+            <div class="max-w-4xl mx-auto text-center px-6">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Learning?</h2>
+                <p class="text-xl text-blue-100 mb-8">Join thousands of developers improving their skills together</p>
+                <button onclick="showDemo()" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg">
+                    Try Demo Now
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Demo Application -->
+    <div id="demoApp" class="min-h-screen bg-gray-50 hidden">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between max-w-7xl mx-auto">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold text-blue-600">PeerCode</h1>
+                </div>
+                
+                <div class="flex-1 max-w-md mx-8">
+                    <div class="relative">
+                        <svg class="absolute left-3 top-3 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search questions, tags..."
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            oninput="filterQuestions(this.value)"
+                        />
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button onclick="showExitModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <span id="userPoints" class="text-sm font-medium text-gray-700">245 pts</span>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl">👨‍💻</span>
+                        <span id="userName" class="text-sm font-medium text-gray-900">Alex Chen</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-50 border-r border-gray-200 h-screen sticky top-0">
+                <div class="p-4">
+                    <button onclick="showAskModal()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <span>Ask a Question</span>
+                    </button>
+                </div>
+                
+                <nav class="px-4" id="sidebarNav">
+                    <button onclick="setCurrentView('feed')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-100 text-blue-700" data-view="feed">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Feed</span>
+                    </button>
+                    <button onclick="setCurrentView('my-questions')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-gray-700 hover:bg-gray-100" data-view="my-questions">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <span>My Questions</span>
+                    </button>
+                    <button onclick="setCurrentView('code-buddies')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-gray-700 hover:bg-gray-100" data-view="code-buddies">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span>Code Buddies</span>
+                    </button>
+                    <button onclick="setCurrentView('challenges')" class="nav-item w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-gray-700 hover:bg-gray-100" data-view="challenges">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                        <span>Challenges</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 overflow-auto" id="mainContent">
+                <!-- Content will be dynamically loaded here -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Ask Question Modal -->
+    <div id="askModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-900">Ask a Question</h2>
+            </div>
+            
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                    <input
+                        type="text"
+                        id="questionTitle"
+                        placeholder="What's your programming question?"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea
+                        id="questionDescription"
+                        placeholder="Explain your problem in detail..."
+                        rows="4"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    ></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Code</label>
+                    <textarea
+                        id="questionCode"
+                        placeholder="Paste your code here..."
+                        rows="8"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+                    ></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <input
+                            type="text"
+                            id="tagInput"
+                                         class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            onkeypress="handleTagInput(event)"r                        />t                        <button onclick="addTag()" class="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700">u                            Adda                        </button>                     </div>                     <div id="questionTags" class="flex flex-wrap gap-2">                         <!-- Tags will be added here -->l                    </div>   <!-- Tags will be added here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6 border-t border-gray-200 flex items-center justify-end space-x-3">
+                <button onclick="hideAskModal()" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
+                    Cancel
+                </button>
+                <button onclick="submitQuestion()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Post Question
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit Demo Modal -->
+    <div id="exitModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Exit Demo?</h3>
+            <p class="text-gray-600 mb-6">
+                You're currently in demo mode. Would you like to return to the home page?
+            </p>
+            <div class="flex items-center justify-end space-x-3">
+                <button onclick="hideExitModal()" class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    Stay in Demo
+                </button>
+                <button onclick="exitDemo()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Go Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Global application state
+let appState = {
+    currentView: 'feed',
+    selectedQuestion: null,
+    searchTerm: '',
+    questionTags: [],
+    hintStates: {}
+};
+
+// Mock data
+const mockData = {
+    users: {
+        u1: { id: 'u1', name: 'Alex Chen', avatar: '👨‍💻', points: 245 },
+        u2: { id: 'u2', name: 'Sarah Kim', avatar: '👩‍💻', points: 189 },
+        u3: { id: 'u3', name: 'Marcus Johnson', avatar: '🧑‍💻', points: 156 },
+        ai: { id: 'ai', name: 'AI Mentor', avatar: '🤖', points: 9999 }
+    },
+    questions: {
+        q1: {
+            id: 'q1',
+            author: 'u1',
+            title: 'Why is my JavaScript loop infinite?',
+            description: 'I wrote a for loop to print numbers 0-9, but it never stops running. Can someone help me understand what\'s wrong?',
+            code: `for(let i = 0; i < 10; i--) {
+    console.log(i);
+}`,
+            tags: ['JavaScript', 'Loops', 'Debugging'],
+            status: 'open',
+            answers: ['a1', 'a2'],
+            timestamp: '2 hours ago',
+            views: 47
+        },
+        q2: {
+            id: 'q2',
+            author: 'u2',
+            title: 'How to reverse an array in Python?',
+            description: 'I need to reverse an array without using built-in functions. What\'s the best approach?',
+            code: `def reverse_array(arr):
+    # What goes here?
+    return arr`,
+            tags: ['Python', 'Arrays', 'Algorithms'],
+            status: 'resolved',
+            answers: ['a3', 'a4'],
+            timestamp: '1 day ago',
+            views: 23
+        },
+        q3: {
+            id: 'q3',
+            author: 'u3',
+            title: 'React useState not updating immediately',
+            description: 'When I call setState, the value doesn\'t update right away. Why is this happening?',
+            code: `const [count, setCount] = useState(0);
+
+const handleClick = () => {
+    setCount(count + 1);
+    console.log(count); // Still shows old value
+};`,
+            tags: ['React', 'Hooks', 'State'],
+            status: 'open',
+            answers: ['a5'],
+            timestamp: '4 hours ago',
+            views: 31
+        }
+    },
+    answers: {
+        a1: {
+            id: 'a1',
+            questionId: 'q1',
+            author: 'u2',
+            content: 'The issue is in your loop increment. You\'re using `i--` which decreases i, so it starts at 0 and goes to -1, -2, etc. Change it to `i++` to increment instead.',
+            code: `for(let i = 0; i < 10; i++) { // Changed i-- to i++
+    console.log(i);
+}`,
+            votes: 5,
+            isAI: false,
+            timestamp: '1 hour ago'
+        },
+        a2: {
+            id: 'a2',
+            questionId: 'q1',
+            author: 'ai',
+            content: 'Let me give you a hint: Look at how you\'re updating the variable `i` in your loop. What happens to a number when you subtract 1 from it repeatedly?',
+            votes: 3,
+            isAI: true,
+            timestamp: '2 hours ago',
+            hints: [
+                'Look at the third part of your for loop - the increment/decrement section.',
+                'You\'re using i-- which means subtract 1 from i each time. Since you start at 0, you\'ll get negative numbers.',
+                'The condition i < 10 will always be true for negative numbers, causing an infinite loop. Use i++ instead.'
+            ]
+        },
+        a3: {
+            id: 'a3',
+            questionId: 'q2',
+            author: 'u1',
+            content: 'You can use two pointers approach - one at the start and one at the end, then swap elements while moving towards center.',
+            code: `def reverse_array(arr):
+    left = 0
+    right = len(arr) - 1
+    
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+        right -= 1
+    
+    return arr`,
+            votes: 8,
+            isAI: false,
+            timestamp: '20 hours ago'
+        },
+        a4: {
+            id: 'a4',
+            questionId: 'q2',
+            author: 'ai',
+            content: 'Think about it step by step: What if you had two pointers, one at each end of the array?',
+            votes: 2,
+            isAI: true,
+            timestamp: '22 hours ago',
+            hints: [
+                'Consider using two pointers - one at the beginning and one at the end of the array.',
+                'You can swap the elements at these positions and then move the pointers toward each other.',
+                'Keep swapping until the pointers meet in the middle. This gives you O(n/2) time complexity.'
+            ]
+        },
+        a5: {
+            id: 'a5',
+            questionId: 'q3',
+            author: 'ai',
+            content: 'This is related to how React batches state updates. Can you think of why React might not update state immediately?',
+            votes: 1,
+            isAI: true,
+            timestamp: '3 hours ago',
+            hints: [
+                'React state updates are asynchronous and batched for performance reasons.',
+                'The console.log runs before the state update is applied. Use useEffect to see the updated value.',
+                'If you need the new value immediately, you can use the functional form: setCount(prev => prev + 1)'
+            ]
+        }
+    },
+    challenges: [
+        {
+            id: 'c1',
+            title: 'Two Sum',
+            difficulty: 'Easy',
+            description: 'Given an array of integers and a target, return indices of two numbers that add up to target.',
+            example: 'Input: [2,7,11,15], target = 9\nOutput: [0,1]'
+        },
+        {
+            id: 'c2',
+            title: 'Palindrome Check',
+            difficulty: 'Easy',
+            description: 'Check if a given string is a palindrome (reads same forwards and backwards).',
+            example: 'Input: "racecar"\nOutput: true'
+        },
+        {
+            id: 'c3',
+            title: 'Binary Tree Traversal',
+            difficulty: 'Medium',
+            description: 'Implement inorder traversal of a binary tree.',
+            example: 'Input: [1,null,2,3]\nOutput: [1,3,2]'
+        }
+    ]
+};
+
+// Utility functions
+function showDemo() {
+    document.getElementById('landingPage').classList.add('hidden');
+    document.getElementById('demoApp').classList.remove('hidden');
+    document.getElementById('demoApp').classList.add('fade-in');
+    renderCurrentView();
+}
+
+function exitDemo() {
+    document.getElementById('demoApp').classList.add('hidden');
+    document.getElementById('landingPage').classList.remove('hidden');
+    document.getElementById('exitModal').classList.add('hidden');
+}
+
+function showExitModal() {
+    document.getElementById('exitModal').classList.remove('hidden');
+}
+
+function hideExitModal() {
+    document.getElementById('exitModal').classList.add('hidden');
+}
+
+function showAskModal() {
+    document.getElementById('askModal').classList.remove('hidden');
+}
+
+function hideAskModal() {
+    document.getElementById('askModal').classList.add('hidden');
+    // Clear form
+    document.getElementById('questionTitle').value = '';
+    document.getElementById('questionDescription').value = '';
+    document.getElementById('questionCode').value = '';
+    document.getElementById('tagInput').value = '';
+    document.getElementById('questionTags').innerHTML = '';
+    appState.questionTags = [];
+}
+
+function setCurrentView(view) {
+    appState.currentView = view;
+    appState.selectedQuestion = null;
+    
+    // Update navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('bg-blue-100', 'text-blue-700');
+        item.classList.add('text-gray-700', 'hover:bg-gray-100');
+    });
+    
+    const activeItem = document.querySelector(`[data-view="${view}"]`);
+    if (activeItem) {
+        activeItem.classList.remove('text-gray-700', 'hover:bg-gray-100');
+        activeItem.classList.add('bg-blue-100', 'text-blue-700');
+    }
+    
+    renderCurrentView();
+}
+
+function renderCurrentView() {
+    const mainContent = document.getElementById('mainContent');
+    
+    if (appState.selectedQuestion) {
+        mainContent.innerHTML = renderQuestionDetail(appState.selectedQuestion);
+        return;
+    }
+    
+    switch (appState.currentView) {
+        case 'feed':
+            mainContent.innerHTML = renderFeed();
+            break;
+        case 'my-questions':
+            mainContent.innerHTML = renderMyQuestions();
+            break;
+        case 'code-buddies':
+            mainContent.innerHTML = renderCodeBuddies();
+            break;
+        case 'challenges':
+            mainContent.innerHTML = renderChallenges();
+            break;
+        default:
+            mainContent.innerHTML = renderFeed();
+    }
+}
+
+function renderFeed() {
+    const questions = Object.values(mockData.questions);
+    const filteredQuestions = questions.filter(question => {
+        if (!appState.searchTerm) return true;
+        const searchLower = appState.searchTerm.toLowerCase();
+        return (
+            question.title.toLowerCase().includes(searchLower) ||
+            question.description.toLowerCase().includes(searchLower) ||
+            question.tags.some(tag => tag.toLowerCase().includes(searchLower))
+        );
+    });
+
+    return `
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">Latest Questions</h1>
+                <div class="text-sm text-gray-500">${filteredQuestions.length} questions</div>
+            </div>
+            
+            <div class="space-y-4">
+                ${filteredQuestions.map(question => renderQuestionCard(question)).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderQuestionCard(question) {
+    const author = mockData.users[question.author];
+    const statusIcon = question.status === 'resolved' 
+        ? '<svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+        : '<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+    
+    return `
+        <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-gray-300 transition-colors">
+            <div class="flex items-start justify-between">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">${question.title}</h3>
+                    <p class="text-gray-600 text-sm mb-4">${question.description}</p>
+                    
+                    <div class="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-lg">${author.avatar}</span>
+                            <span>${author.name}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>${question.timestamp}</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            <span>${question.views} views</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2 mb-4">
+                        ${question.tags.map(tag => `<span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">${tag}</span>`).join('')}
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2 ml-4">
+                    ${statusIcon}
+                    <span class="text-sm font-medium ${question.status === 'resolved' ? 'text-green-600' : 'text-gray-600'}">
+                        ${question.status === 'resolved' ? 'Resolved' : 'Open'}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button onclick="viewQuestion('${question.id}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                    View Question
+                </button>
+                <span class="text-sm text-gray-500">${question.answers.length} answers</span>
+            </div>
+        </div>
+    `;
+}
+
+function renderQuestionDetail(question) {
+    const author = mockData.users[question.author];
+    const answers = question.answers.map(id => mockData.answers[id]);
+    const statusIcon = question.status === 'resolved' 
+        ? '<svg class="h-6 w-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+        : '<svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+
+    return `
+        <div class="max-w-4xl mx-auto p-6">
+            <button onclick="backToFeed()" class="mb-6 text-blue-600 hover:text-blue-800 flex items-center space-x-1">
+                <span>← Back to Feed</span>
+            </button>
+            
+            <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex-1">
+                        <h1 class="text-2xl font-bold text-gray-900 mb-3">${question.title}</h1>
+                        <p class="text-gray-700 mb-4">${question.description}</p>
+                        
+                        <div class="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                            <div class="flex items-center space-x-1">
+                                <span class="text-lg">${author.avatar}</span>
+                                <span>${author.name}</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>${question.timestamp}</span>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <span>${question.views} views</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        ${statusIcon}
+                    </div>
+                </div>
+                
+                ${renderCodeBlock(question.code, 'javascript')}
+                
+                <div class="flex items-center space-x-2 mt-4">
+                    ${question.tags.map(tag => `<span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">${tag}</span>`).join('')}
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">${answers.length} Answers</h2>
+                ${answers.map(answer => renderAnswerCard(answer)).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderAnswerCard(answer) {
+    const author = mockData.users[answer.author];
+    const currentHintIndex = appState.hintStates[answer.id] || 0;
+    
+    let content = `
+        <div class="${answer.isAI ? 'bg-blue-50 border-blue-200' : 'bg-white border-gray-200'} rounded-lg border p-4">
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="text-lg">${author.avatar}</span>
+                    <div>
+                        <span class="font-medium text-gray-900">${author.name}</span>
+                        ${answer.isAI ? '<span class="ml-2 text-xs bg-blue-600 text-white px-2 py-1 rounded-full">AI Mentor</span>' : ''}
+                        <div class="text-xs text-gray-500">${answer.timestamp}</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2">
+                    <button onclick="voteAnswer('${answer.id}', 'up')" class="flex items-center space-x-1 text-gray-500 hover:text-green-600">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                        </svg>
+                        <span class="text-sm">${answer.votes}</span>
+                    </button>
+                    <button onclick="voteAnswer('${answer.id}', 'down')" class="text-gray-500 hover:text-red-600">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018c.163 0 .326.02.485.06L17 4m-7 10v5a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 13V4m-7 10h2m5-10H9a2 2 0 00-2 2v6a2 2 0 002 2h2.5"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <p class="text-gray-700 mb-3">${answer.content}</p>
+    `;
+    
+    if (answer.isAI && answer.hints) {
+        content += `
+            <div class="bg-white rounded-lg p-4 border border-blue-200">
+                <h4 class="font-medium text-blue-900 mb-2">💡 Hint ${currentHintIndex + 1}:</h4>
+                <p class="text-gray-700 mb-3">${answer.hints[currentHintIndex]}</p>
+                
+                ${currentHintIndex < answer.hints.length - 1 
+                    ? `<button onclick="showNextHint('${answer.id}')" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Next Hint</button>`
+                    : '<div class="text-sm text-blue-600 font-medium">All hints revealed! 🎉</div>'
+                }
+            </div>
+        `;
+    } else if (answer.code) {
+        content += renderCodeBlock(answer.code, 'javascript');
+    }
+    
+    content += '</div>';
+    return content;
+}
+
+function renderCodeBlock(code, language = 'javascript') {
+    return `
+        <div class="relative bg-gray-900 rounded-lg overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-2 bg-gray-800">
+                <span class="text-gray-400 text-sm">${language}</span>
+                <button onclick="copyToClipboard(\`${code.replace(/`/g, '\\`')}\`)" class="flex items-center space-x-1 text-gray-400 hover:text-white text-sm">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Copy</span>
+                </button>
+            </div>
+            <pre class="p-4 text-sm text-gray-100 overflow-x-auto"><code>${escapeHtml(code)}</code></pre>
+        </div>
+    `;
+}
+
+function renderMyQuestions() {
+    const myQuestions = Object.values(mockData.questions).filter(
+        question => question.author === 'u1' // Current user
+    );
+
+    if (myQuestions.length === 0) {
+        return `
+            <div class="max-w-4xl mx-auto p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900">My Questions</h1>
+                    <div class="text-sm text-gray-500">0 questions</div>
+                </div>
+                
+                <div class="text-center py-12">
+                    <div class="text-gray-400 mb-4">
+                        <svg class="h-12 w-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No questions yet</h3>
+                    <p class="text-gray-600">Ask your first question to get started!</p>
+                </div>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-2xl font-bold text-gray-900">My Questions</h1>
+                <div class="text-sm text-gray-500">${myQuestions.length} questions</div>
+            </div>
+            
+            <div class="space-y-4">
+                ${myQuestions.map(question => renderQuestionCard(question)).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderCodeBuddies() {
+    const topHelpers = Object.values(mockData.users)
+        .filter(user => user.id !== 'ai')
+        .sort((a, b) => b.points - a.points);
+
+    return `
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Code Buddies</h1>
+                <p class="text-gray-600">Connect with fellow developers and top contributors</p>
+            </div>
+            
+            <div class="grid gap-4">
+                ${topHelpers.map(user => `
+                    <div class="bg-white rounded-lg border border-gray-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-3xl">${user.avatar}</span>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">${user.name}</h3>
+                                    <p class="text-sm text-gray-600">${user.points} points earned</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3">
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                                    Connect
+                                </button>
+                                <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+                                    Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderChallenges() {
+    const getDifficultyColor = (difficulty) => {
+        switch (difficulty) {
+            case 'Easy': return 'bg-green-100 text-green-800';
+            case 'Medium': return 'bg-yellow-100 text-yellow-800';
+            case 'Hard': return 'bg-red-100 text-red-800';
+            default: return 'bg-gray-100 text-gray-800';
+        }
+    };
+
+    return `
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Coding Challenges</h1>
+                <p class="text-gray-600">Practice your skills with these coding challenges</p>
+            </div>
+            
+            <div class="grid gap-4">
+                ${mockData.challenges.map(challenge => `
+                    <div class="bg-white rounded-lg border border-gray-200 p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900">${challenge.title}</h3>
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full ${getDifficultyColor(challenge.difficulty)}">
+                                        ${challenge.difficulty}
+                                    </span>
+                                </div>
+                                <p class="text-gray-600 mb-3">${challenge.description}</p>
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-1">Example:</h4>
+                                    <pre class="text-sm text-gray-600 whitespace-pre-wrap">${challenge.example}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                            <span>Solve Challenge</span>
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+// Event handlers
+function viewQuestion(questionId) {
+    appState.selectedQuestion = mockData.questions[questionId];
+    renderCurrentView();
+}
+
+function backToFeed() {
+    appState.selectedQuestion = null;
+    renderCurrentView();
+}
+
+function filterQuestions(searchTerm) {
+    appState.searchTerm = searchTerm;
+    if (appState.currentView === 'feed') {
+        renderCurrentView();
+    }
+}
+
+function showNextHint(answerId) {
+    if (!appState.hintStates[answerId]) {
+        appState.hintStates[answerId] = 0;
+    }
+    appState.hintStates[answerId]++;
+    renderCurrentView();
+}
+
+function voteAnswer(answerId, direction) {
+    const answer = mockData.answers[answerId];
+    if (direction === 'up') {
+        answer.votes++;
+    } else {
+        answer.votes = Math.max(0, answer.votes - 1);
+    }
+    renderCurrentView();
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Could show a toast notification here
+        console.log('Code copied to clipboard!');
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Tag management for ask question modal
+function handleTagInput(event) {
+    if (event.key === 'Enter') {
+        addTag();
+    }
+}
+
+function addTag() {
+    const tagInput = document.getElementById('tagInput');
+    const tag = tagInput.value.trim();
+    
+    if (tag && !appState.questionTags.includes(tag)) {
+        appState.questionTags.push(tag);
+        tagInput.value = '';
+        renderTags();
+    }
+}
+
+function removeTag(tagToRemove) {
+    appState.questionTags = appState.questionTags.filter(tag => tag !== tagToRemove);
+    renderTags();
+}
+
+function renderTags() {
+    const tagsContainer = document.getElementById('questionTags');
+    tagsContainer.innerHTML = appState.questionTags.map(tag => `
+        <span class="inline-flex items-center space-x-1 px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
+            <span>${tag}</span>
+            <button onclick="removeTag('${tag}')" class="text-blue-500 hover:text-blue-700">×</button>
+        </span>
+    `).join('');
+}
+
+function submitQuestion() {
+    const title = document.getElementById('questionTitle').value.trim();
+    const description = document.getElementById('questionDescription').value.trim();
+    const code = document.getElementById('questionCode').value.trim();
+    
+    if (!title || !description) {
+        alert('Please fill in at least the title and description.');
+        return;
+    }
+    
+    // In a real app, this would submit to a backend
+    console.log('Submitting question:', {
+        title,
+        description,
+        code,
+        tags: appState.questionTags
+    });
+    
+    alert('Question submitted successfully! (This is just a demo)');
+    hideAskModal();
+}
+
+function showAskModal() {
+    const modal = document.getElementById('askModal');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modalContent.classList.add('show');
+    }, 10);
+}
+
+function hideAskModal() {
+    const modal = document.getElementById('askModal');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    modalContent.classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        // Clear form
+        document.getElementById('questionTitle').value = '';
+        document.getElementById('questionDescription').value = '';
+        document.getElementById('questionCode').value = '';
+        document.getElementById('tagInput').value = '';
+        document.getElementById('questionTags').innerHTML = '';
+        appState.questionTags = [];
+    }, 300);
+}
+
+function showExitModal() {
+    const modal = document.getElementById('exitModal');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modalContent.classList.add('show');
+    }, 10);
+}
+
+function hideExitModal() {
+    const modal = document.getElementById('exitModal');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    modalContent.classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Show a brief success animation
+        console.log('Code copied to clipboard!');
+        // Could add a toast notification here
+    });
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Enhanced tag management with animations
+function handleTagInput(event) {
+    if (event.key === 'Enter') {
+        addTag();
+        event.preventDefault();
+    }
+}
+
+function addTag() {
+    const tagInput = document.getElementById('tagInput');
+    const tag = tagInput.value.trim();
+    
+    if (tag && !appState.questionTags.includes(tag)) {
+        appState.questionTags.push(tag);
+        tagInput.value = '';
+        renderTags();
+        
+        // Animate the newly added tag
+        setTimeout(() => {
+            const tags = document.querySelectorAll('#questionTags .tag');
+            if (tags.length > 0) {
+                const newTag = tags[tags.length - 1];
+                newTag.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    newTag.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, 50);
+    }
+}
+
+function removeTag(tagToRemove) {
+    appState.questionTags = appState.questionTags.filter(tag => tag !== tagToRemove);
+    renderTags();
+}
+
+function renderTags() {
+    const tagsContainer = document.getElementById('questionTags');
+    tagsContainer.innerHTML = appState.questionTags.map(tag => `
+        <span class="tag inline-flex items-center space-x-1 px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
+            <span>${tag}</span>
+            <button onclick="removeTag('${tag}')" class="text-blue-500 hover:text-blue-700 ml-1">×</button>
+        </span>
+    `).join('');
+}
+
+function submitQuestion() {
+    const title = document.getElementById('questionTitle').value.trim();
+    const description = document.getElementById('questionDescription').value.trim();
+    const code = document.getElementById('questionCode').value.trim();
+    
+    if (!title || !description) {
+        // Add shake animation to required fields
+        const titleInput = document.getElementById('questionTitle');
+        const descInput = document.getElementById('questionDescription');
+        
+        if (!title) {
+            titleInput.style.borderColor = '#ef4444';
+            titleInput.style.animation = 'shake 0.5s';
+        }
+        if (!description) {
+            descInput.style.borderColor = '#ef4444';
+            descInput.style.animation = 'shake 0.5s';
+        }
+        
+        setTimeout(() => {
+            titleInput.style.borderColor = '';
+            descInput.style.borderColor = '';
+            titleInput.style.animation = '';
+            descInput.style.animation = '';
+        }, 500);
+        
+        return;
+    }
+    
+    // Simulate successful submission
+    updateUserPoints(10);
+    console.log('Submitting question:', {
+        title,
+        description,
+        code,
+        tags: appState.questionTags
+    });
+    
+    // Show success feedback
+    const submitBtn = event.target;
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Posted!';
+    submitBtn.style.backgroundColor = '#10b981';
+    
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.backgroundColor = '';
+        hideAskModal();
+    }, 1000);
+}
+
+// Add smooth section transitions
+function renderCurrentView() {
+    const mainContent = document.getElementById('mainContent');
+    
+    // Add loading state
+    mainContent.classList.add('loading');
+    
+    setTimeout(() => {
+        if (appState.selectedQuestion) {
+            mainContent.innerHTML = `<div class="section-content">${renderQuestionDetail(appState.selectedQuestion)}</div>`;
+        } else {
+            let content = '';
+            switch (appState.currentView) {
+                case 'feed':
+                    content = renderFeed();
+                    break;
+                case 'my-questions':
+                    content = renderMyQuestions();
+                    break;
+                case 'code-buddies':
+                    content = renderCodeBuddies();
+                    break;
+                case 'challenges':
+                    content = renderChallenges();
+                    break;
+                default:
+                    content = renderFeed();
+            }
+            mainContent.innerHTML = `<div class="section-content">${content}</div>`;
+        }
+        
+        // Remove loading and trigger animation
+        mainContent.classList.remove('loading');
+        const sectionContent = mainContent.querySelector('.section-content');
+        if (sectionContent) {
+            setTimeout(() => {
+                sectionContent.classList.add('visible');
+            }, 50);
+        }
+    }, 100);
+}
+
+// Initialize the application with smooth transitions
+document.addEventListener('DOMContentLoaded', function() {
+    renderCurrentView();
+    
+    // Add CSS for shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    /// Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      mobileToggle.classList.toggle('active');
+    });
+
+    // Close mobile menu after click
+    navMenu.classList.remove('active');
+    mobileToggle.classList.remove('active');
+});
+</script>
+</body>
+</html>
