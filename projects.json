@@ -1,21 +1,11 @@
 [
   {
-    "id": "shopping-cart",
-    "title": "Shopping Cart Website",
-    "description": "A fully functional e-commerce cart built in vanilla JavaScript — dynamic product display, real-time cart management, quantity controls, and a complete payment system with change calculation.",
-    "image": "dist/img/shopping.png",
-    "imageStyle": "cover",
-    "link": "/shopping cart/src/shopping cart website.html",
-    "tags": ["JavaScript", "E-Commerce", "DOM"],
-    "featured": true
-  },
-  {
     "id": "opsight",
     "title": "OpSight",
     "description": "A modern web application built to deliver operational clarity and actionable insights. Designed with a focus on clean architecture and real-time data visualization.",
     "image": "dist//img/OpSight.png",
     "imageStyle": "cover",
-    "link": "/dist/opsight.html",
+    "link": "opsight-usa.com",
     "tags": ["AI Solutions", "Business development", "People development", "other"],
     "featured": true
   },
@@ -27,6 +17,16 @@
     "imageStyle": "contain",
     "link": "/PeerCode()/PeerCode.html",
     "tags": ["AI Mentoring", "Student Development", "Collaboration"],
+    "featured": true
+  },
+  {
+    "id": "shopping-cart",
+    "title": "Shopping Cart Website",
+    "description": "A fully functional e-commerce cart built in vanilla JavaScript — dynamic product display, real-time cart management, quantity controls, and a complete payment system with change calculation.",
+    "image": "dist/img/shopping.png",
+    "imageStyle": "cover",
+    "link": "/shopping cart/src/shopping cart website.html",
+    "tags": ["JavaScript", "E-Commerce", "DOM"],
     "featured": true
   },
   {
