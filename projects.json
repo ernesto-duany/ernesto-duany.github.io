@@ -3,9 +3,9 @@
     "id": "opsight",
     "title": "OpSight",
     "description": "A modern web application built to deliver operational clarity and actionable insights. Designed with a focus on clean architecture and real-time data visualization.",
-    "image": "dist/img/OpSight.png",
+    "image": "dist/img/opsight.png",
     "imageStyle": "cover",
-    "link": "website_url": "https://example.com",
+    "link": "website_url": "https://opsight-usa.com",
     "tags": ["AI Solutions", "Business development", "People development", "other"],
     "featured": true
   },
